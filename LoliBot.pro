@@ -1,4 +1,4 @@
-update=9/10/2017 11:15:19 PM
+update=Wednesday, 11 October 2017 'amt' 03:52:45 am
 version=1
 last_client=kicad
 [pcbnew]
@@ -27,7 +27,7 @@ NetIExt=net
 version=1
 [eeschema]
 version=1
-LibDir=
+LibDir=libs
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -61,3 +61,4 @@ LibName29=valves
 LibName30=libs/spst
 LibName31=libs/rt9276
 LibName32=libs/l9110
+LibName33=libs/lolin32_lite

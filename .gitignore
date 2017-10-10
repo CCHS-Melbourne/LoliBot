@@ -20,4 +20,4 @@ _autosave-*
 *.xml
 *.csv
 
-~.skp
+*~.skp
