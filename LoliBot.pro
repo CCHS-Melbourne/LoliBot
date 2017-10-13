@@ -1,4 +1,4 @@
-update=Wednesday, 11 October 2017 'amt' 03:52:45 am
+update=13/10/2017 11:14:32 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,4 +61,4 @@ LibName29=valves
 LibName30=libs/spst
 LibName31=libs/rt9276
 LibName32=libs/l9110
-LibName33=libs/lolin32_lite
+LibName33=libs/lolin32-lite
