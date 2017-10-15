@@ -6,6 +6,11 @@ WIP robot which is built on the WEMOS LOLIN32.
 * [mpu-6050](https://www.invensense.com/products/motion-tracking/6-axis/mpu-6050/) TBD lots of options
 * [Wheels](https://www.aliexpress.com/item/TT-Motor-130motor-with-the-wheel-Smart-Car-Robot-Gear-Motor-for-Arduino-DC3V-6V-DC/32829319427.html) one of many like this..
 
+# datasheets
+
+* [RT9276 Synchronous Boost Converter with Voltage Detector](datasheets/DS9276-02.pdf)
+* [L9110 Motor control driver chip](datasheets/datasheet-l9110.pdf)
+
 # LICENSE
 
 Licensed under the TAPR Open Hardware License (www.tapr.org/OHL). The "license" sub-folder also contains a copy of this license in plain text format.
