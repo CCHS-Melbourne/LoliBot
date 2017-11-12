@@ -556,7 +556,7 @@ F 1 "LEFT" V 10950 6100 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.00mm" H 10850 6100 50  0001 C CNN
 F 3 "" H 10850 6100 50  0001 C CNN
 	1    10850 6100
-	0    1    1    0   
+	0    -1   1    0   
 $EndComp
 $Comp
 L GND #PWR014
@@ -606,9 +606,9 @@ Wire Wire Line
 	9150 5400 8750 5400
 Wire Wire Line
 	9150 5850 8750 5850
-Text Label 8750 5400 0    60   ~ 0
-IO34
 Text Label 8750 5850 0    60   ~ 0
+IO34
+Text Label 8750 5400 0    60   ~ 0
 IO35
 $Comp
 L CONN_01X03 J3
