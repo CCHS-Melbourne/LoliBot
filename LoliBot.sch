@@ -476,12 +476,12 @@ $EndComp
 $Comp
 L CONN_01X02 J4
 U 1 1 59DBB5AA
-P 10800 4800
-F 0 "J4" H 10800 4950 50  0000 C CNN
-F 1 "RIGHT" V 10900 4800 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.00mm" H 10800 4800 50  0001 C CNN
-F 3 "" H 10800 4800 50  0001 C CNN
-	1    10800 4800
+P 8800 4800
+F 0 "J4" H 8800 4950 50  0000 C CNN
+F 1 "RIGHT" V 8900 4800 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.00mm" H 8800 4800 50  0001 C CNN
+F 3 "" H 8800 4800 50  0001 C CNN
+	1    8800 4800
 	0    1    1    0   
 $EndComp
 $Comp
@@ -503,13 +503,9 @@ Wire Wire Line
 	10300 4550 10450 4550
 Connection ~ 10450 4550
 Wire Wire Line
-	10300 4400 10750 4400
-Wire Wire Line
-	10750 4400 10750 4600
+	10300 4400 10850 4400
 Wire Wire Line
 	10300 4250 10850 4250
-Wire Wire Line
-	10850 4250 10850 4600
 $Comp
 L +5V #PWR013
 U 1 1 59DBBC2C
@@ -528,13 +524,9 @@ Wire Wire Line
 Wire Wire Line
 	9100 4250 8950 4250
 Connection ~ 8950 4250
-Wire Wire Line
-	9100 4100 8700 4100
-Wire Wire Line
-	9100 4550 8700 4550
-Text Label 8700 4100 0    60   ~ 0
+Text Label 10850 4400 2    60   ~ 0
 IO5
-Text Label 8700 4550 0    60   ~ 0
+Text Label 10850 4250 2    60   ~ 0
 IO23
 $Comp
 L L9110 U4
@@ -550,12 +542,12 @@ $EndComp
 $Comp
 L CONN_01X02 J5
 U 1 1 59DBCDBD
-P 10850 6100
-F 0 "J5" H 10850 6250 50  0000 C CNN
-F 1 "LEFT" V 10950 6100 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.00mm" H 10850 6100 50  0001 C CNN
-F 3 "" H 10850 6100 50  0001 C CNN
-	1    10850 6100
+P 8850 6150
+F 0 "J5" H 8850 6300 50  0000 C CNN
+F 1 "LEFT" V 8950 6150 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.00mm" H 8850 6150 50  0001 C CNN
+F 3 "" H 8850 6150 50  0001 C CNN
+	1    8850 6150
 	0    -1   1    0   
 $EndComp
 $Comp
@@ -577,13 +569,9 @@ Wire Wire Line
 	10350 5850 10500 5850
 Connection ~ 10500 5850
 Wire Wire Line
-	10350 5700 10800 5700
+	10350 5700 10750 5700
 Wire Wire Line
-	10800 5700 10800 5900
-Wire Wire Line
-	10350 5550 10900 5550
-Wire Wire Line
-	10900 5550 10900 5900
+	10350 5550 10750 5550
 $Comp
 L +5V #PWR015
 U 1 1 59DBCDD1
@@ -602,13 +590,9 @@ Wire Wire Line
 Wire Wire Line
 	9150 5550 9000 5550
 Connection ~ 9000 5550
-Wire Wire Line
-	9150 5400 8750 5400
-Wire Wire Line
-	9150 5850 8750 5850
-Text Label 8750 5850 0    60   ~ 0
+Text Label 10750 5550 2    60   ~ 0
 IO34
-Text Label 8750 5400 0    60   ~ 0
+Text Label 10750 5700 2    60   ~ 0
 IO35
 $Comp
 L CONN_01X03 J3
@@ -1138,4 +1122,20 @@ F 3 "" H 10300 3550 50  0001 C CNN
 	1    10300 3550
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	8850 4600 8850 4550
+Wire Wire Line
+	8850 4550 9100 4550
+Wire Wire Line
+	9100 4100 8750 4100
+Wire Wire Line
+	8750 4100 8750 4600
+Wire Wire Line
+	9150 5850 8900 5850
+Wire Wire Line
+	8900 5850 8900 5950
+Wire Wire Line
+	9150 5400 8800 5400
+Wire Wire Line
+	8800 5400 8800 5950
 $EndSCHEMATC
