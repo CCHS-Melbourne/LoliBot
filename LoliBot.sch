@@ -596,10 +596,10 @@ U 1 1 59DBD721
 P 8700 2900
 F 0 "J3" H 8700 3100 50  0000 C CNN
 F 1 "SERVO1" V 8800 2900 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03_Pitch2.54mm" H 8700 2900 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Angled_1x03_Pitch2.54mm" H 8700 2900 50  0001 C CNN
 F 3 "" H 8700 2900 50  0001 C CNN
 	1    8700 2900
-	1    0    0    -1  
+	1    0    0    1   
 $EndComp
 $Comp
 L +5V #PWR016
