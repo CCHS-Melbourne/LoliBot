@@ -21,3 +21,6 @@ _autosave-*
 *.csv
 
 *~.skp
+dxf*
+gerber*
+*.zip
