@@ -1,6 +1,16 @@
-# LolinBot
+# LoliBot - The ESP32 Based Soccer bot.
 
-WIP robot which is built on the WEMOS LOLIN32.
+Welcome to the 2018 linux.conf.au Open Hardware Project.  You can see information about this and other MiniConfs at http://www.openhardwareconf.org/wiki/Main_Page
+
+This simple robot is designed to chase and kick a Ping Pong ball around.  The Lolin32-lite package by Wemos has been used to get the most out of the ESP32 chip.
+
+Screen Shots
+--------------
+
+![LoliBot Render](LoliBot.png?raw=true "Render")
+
+Hardware Links
+--------------
 
 * [WEMOS LOLIN32](https://wiki.wemos.cc/products:lolin32:lolin32)
 * [mpu-6050](https://www.invensense.com/products/motion-tracking/6-axis/mpu-6050/) TBD lots of options
@@ -15,4 +25,4 @@ WIP robot which is built on the WEMOS LOLIN32.
 
 Licensed under the TAPR Open Hardware License (www.tapr.org/OHL). The "license" sub-folder also contains a copy of this license in plain text format.
 
-Copyright John Spencer, Bob Powers, Angus Gratton, Andy Gelme, Jon Oxer, Mark Wolfe 2017
+Copyright John Spencer, Angus Gratton, Andy Gelme, Jon Oxer, Mark Wolfe 2017
