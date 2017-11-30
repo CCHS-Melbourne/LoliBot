@@ -7,7 +7,7 @@ This simple robot is designed to chase and kick a Ping Pong ball around.  The Lo
 Screen Shots
 --------------
 
-![LoliBot Render](LoliBot.png?raw=true "Render")
+![LoliBot Render](LoliBot-render.png?raw=true "Render")
 
 Hardware Links
 --------------
