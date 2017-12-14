@@ -2,7 +2,10 @@
 
 Welcome to the 2018 linux.conf.au Open Hardware Project.  You can see information about this and other MiniConfs at http://www.openhardwareconf.org/wiki/Main_Page
 
-This simple robot is designed to chase and kick a Ping Pong ball around.  The Lolin32-lite package by Wemos has been used to get the most out of the ESP32 chip.
+This simple robot is designed to chase and kick a Ping Pong ball around.  It features a Lolin32-lite ESP32 based chip as it's primary microprocessor and includes a MPU6050 6 axis accelerometer.
+
+In order to reduce complexity and to be a bit more flexible with our design this years project is a platform with discrete components.
+Those of you who are looking forward to the smell of melting solder won't be disappointed though, there are many headers, LEDS and switches to keep you busy.
 
 Screen Shots
 --------------
@@ -18,7 +21,6 @@ Hardware Links
 
 # datasheets
 
-* [RT9276 Synchronous Boost Converter with Voltage Detector](datasheets/DS9276-02.pdf)
 * [L9110 Motor control driver chip](datasheets/datasheet-l9110.pdf)
 
 # LICENSE
