@@ -1,0 +1,418 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:Loliwrapper-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CONN_01X08 J1
+U 1 1 5A3254FD
+P 3950 3000
+F 0 "J1" H 3950 3450 50  0000 C CNN
+F 1 "CONN_01X08" V 4050 3000 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x04_Pitch2.54mm" H 3950 3000 50  0001 C CNN
+F 3 "" H 3950 3000 50  0001 C CNN
+	1    3950 3000
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CONN_01X08 J3
+U 1 1 5A3255C8
+P 5300 3000
+F 0 "J3" H 5300 3450 50  0000 C CNN
+F 1 "CONN_01X08" V 5400 3000 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x04_Pitch2.54mm" H 5300 3000 50  0001 C CNN
+F 3 "" H 5300 3000 50  0001 C CNN
+	1    5300 3000
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CONN_01X02 J2
+U 1 1 5A32568C
+P 3950 4300
+F 0 "J2" H 3950 4450 50  0000 C CNN
+F 1 "BRG_RIGHT" V 4050 4300 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 3950 4300 50  0001 C CNN
+F 3 "" H 3950 4300 50  0001 C CNN
+	1    3950 4300
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CONN_01X02 J4
+U 1 1 5A32592F
+P 5350 4300
+F 0 "J4" H 5350 4450 50  0000 C CNN
+F 1 "BRG_LEFT" V 5450 4300 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 5350 4300 50  0001 C CNN
+F 3 "" H 5350 4300 50  0001 C CNN
+	1    5350 4300
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4150 4250 4450 4250
+Text Label 4450 4250 2    60   ~ 0
+BAT_V
+Wire Wire Line
+	5550 4250 5850 4250
+Text Label 5850 4250 2    60   ~ 0
+BAT_V
+Wire Wire Line
+	4150 2650 4450 2650
+Text Label 4450 2650 2    60   ~ 0
+BAT_V
+$Comp
+L +3.3V #PWR01
+U 1 1 5A325B4C
+P 5600 2550
+F 0 "#PWR01" H 5600 2400 50  0001 C CNN
+F 1 "+3.3V" H 5600 2690 50  0000 C CNN
+F 2 "" H 5600 2550 50  0001 C CNN
+F 3 "" H 5600 2550 50  0001 C CNN
+	1    5600 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5500 2650 5600 2650
+Wire Wire Line
+	5600 2650 5600 2550
+$Comp
+L GND #PWR02
+U 1 1 5A325C79
+P 4250 3450
+F 0 "#PWR02" H 4250 3200 50  0001 C CNN
+F 1 "GND" H 4250 3300 50  0000 C CNN
+F 2 "" H 4250 3450 50  0001 C CNN
+F 3 "" H 4250 3450 50  0001 C CNN
+	1    4250 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4150 3350 4250 3350
+Wire Wire Line
+	4250 3350 4250 3450
+Wire Wire Line
+	4150 2750 4450 2750
+Wire Wire Line
+	4150 2850 4450 2850
+Wire Wire Line
+	4150 2950 4450 2950
+Wire Wire Line
+	4150 3050 4450 3050
+Wire Wire Line
+	4150 3150 4450 3150
+Wire Wire Line
+	4150 3250 4450 3250
+Wire Wire Line
+	5500 2750 5800 2750
+Text Label 5800 2750 2    60   ~ 0
+IO12
+Wire Wire Line
+	5500 2850 5950 2850
+Wire Wire Line
+	5500 2950 5950 2950
+Wire Wire Line
+	5500 3050 5800 3050
+Wire Wire Line
+	5500 3150 5800 3150
+Wire Wire Line
+	5500 3250 5800 3250
+Wire Wire Line
+	5500 3350 5800 3350
+Text Label 4450 2750 2    60   ~ 0
+IO33
+Text Label 4450 2850 2    60   ~ 0
+VP
+Text Label 4450 3050 2    60   ~ 0
+VN
+Text Label 4450 2950 2    60   ~ 0
+IO32
+Text Label 4450 3150 2    60   ~ 0
+IO35
+Text Label 4450 3250 2    60   ~ 0
+IO34
+Text Label 5950 2850 2    60   ~ 0
+SDL/IO19
+Text Label 5950 2950 2    60   ~ 0
+SDA/IO18
+Text Label 5800 3050 2    60   ~ 0
+IO25
+Text Label 5800 3150 2    60   ~ 0
+IO14
+Text Label 5800 3250 2    60   ~ 0
+IO26
+Text Label 5800 3350 2    60   ~ 0
+IO27
+Wire Wire Line
+	4150 4350 4450 4350
+Wire Wire Line
+	5550 4350 5850 4350
+Text Label 4450 4350 2    60   ~ 0
+R_V
+Text Label 5850 4350 2    60   ~ 0
+L_V
+$Comp
+L CONN_01X02 J5
+U 1 1 5A378ABA
+P 7350 2700
+F 0 "J5" H 7350 2850 50  0000 C CNN
+F 1 "proto-space" V 7450 2700 50  0000 C CNN
+F 2 "libs:proto-board" H 7350 2700 50  0001 C CNN
+F 3 "" H 7350 2700 50  0001 C CNN
+	1    7350 2700
+	-1   0    0    1   
+$EndComp
+$Comp
+L +3.3V #PWR03
+U 1 1 5A378BE3
+P 7650 3600
+F 0 "#PWR03" H 7650 3450 50  0001 C CNN
+F 1 "+3.3V" H 7650 3740 50  0000 C CNN
+F 2 "" H 7650 3600 50  0001 C CNN
+F 3 "" H 7650 3600 50  0001 C CNN
+	1    7650 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR04
+U 1 1 5A378C6B
+P 7650 3900
+F 0 "#PWR04" H 7650 3650 50  0001 C CNN
+F 1 "GND" H 7650 3750 50  0000 C CNN
+F 2 "" H 7650 3900 50  0001 C CNN
+F 3 "" H 7650 3900 50  0001 C CNN
+	1    7650 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 3800 7650 3800
+Wire Wire Line
+	7650 3800 7650 3900
+Wire Wire Line
+	7550 3700 7650 3700
+Wire Wire Line
+	7650 3700 7650 3600
+$Comp
+L CONN_01X13 J6
+U 1 1 5A37941D
+P 3950 5850
+F 0 "J6" H 3950 6550 50  0000 C CNN
+F 1 "CONN_01X13" V 4050 5850 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x13_Pitch2.54mm" H 3950 5850 50  0001 C CNN
+F 3 "" H 3950 5850 50  0001 C CNN
+	1    3950 5850
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4150 5250 4450 5250
+Text Label 4450 5250 2    60   ~ 0
+IO12
+Wire Wire Line
+	4150 5450 4450 5450
+Wire Wire Line
+	4150 5350 4600 5350
+Wire Wire Line
+	4150 5650 4450 5650
+Wire Wire Line
+	4150 5750 4450 5750
+Wire Wire Line
+	4150 5850 4600 5850
+Wire Wire Line
+	4150 5550 4450 5550
+Text Label 4600 5850 2    60   ~ 0
+SDL/IO19
+Text Label 4600 5350 2    60   ~ 0
+SDA/IO18
+Text Label 4450 5750 2    60   ~ 0
+IO25
+Text Label 4450 5450 2    60   ~ 0
+IO14
+Text Label 4450 5650 2    60   ~ 0
+IO26
+Text Label 4450 5550 2    60   ~ 0
+IO27
+Wire Wire Line
+	4150 5950 4450 5950
+Wire Wire Line
+	4150 6050 4450 6050
+Wire Wire Line
+	4150 6150 4450 6150
+Wire Wire Line
+	4150 6250 4450 6250
+Wire Wire Line
+	4150 6350 4450 6350
+Wire Wire Line
+	4150 6450 4450 6450
+Text Label 4450 5950 2    60   ~ 0
+IO33
+Text Label 4450 6450 2    60   ~ 0
+VP
+Text Label 4450 6350 2    60   ~ 0
+VN
+Text Label 4450 6050 2    60   ~ 0
+IO32
+Text Label 4450 6150 2    60   ~ 0
+IO35
+Text Label 4450 6250 2    60   ~ 0
+IO34
+$Comp
+L CONN_01X12 J7
+U 1 1 5A37953C
+P 5700 5750
+F 0 "J7" H 5700 6400 50  0000 C CNN
+F 1 "BAT_V" V 5800 5750 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x12_Pitch2.54mm" H 5700 5750 50  0001 C CNN
+F 3 "" H 5700 5750 50  0001 C CNN
+	1    5700 5750
+	-1   0    0    -1  
+$EndComp
+Text Label 6250 5200 2    60   ~ 0
+BAT_V
+Wire Wire Line
+	6250 5200 5900 5200
+Wire Wire Line
+	5900 5200 5900 6300
+Connection ~ 5900 5300
+Connection ~ 5900 5400
+Connection ~ 5900 5500
+Connection ~ 5900 5600
+Connection ~ 5900 5700
+Connection ~ 5900 5800
+Connection ~ 5900 5900
+Connection ~ 5900 6000
+Connection ~ 5900 6100
+Connection ~ 5900 6200
+Connection ~ 5900 5200
+$Comp
+L CONN_01X02 J8
+U 1 1 5A37A2BC
+P 7350 3750
+F 0 "J8" H 7350 3900 50  0000 C CNN
+F 1 "proto-space" V 7450 3750 50  0000 C CNN
+F 2 "libs:8x25-proto" H 7350 3750 50  0001 C CNN
+F 3 "" H 7350 3750 50  0001 C CNN
+	1    7350 3750
+	-1   0    0    -1  
+$EndComp
+$Comp
+L CONN_01X02 J9
+U 1 1 5A37A32A
+P 7350 4600
+F 0 "J9" H 7350 4750 50  0000 C CNN
+F 1 "proto-space" V 7450 4600 50  0000 C CNN
+F 2 "libs:6x25-proto" H 7350 4600 50  0001 C CNN
+F 3 "" H 7350 4600 50  0001 C CNN
+	1    7350 4600
+	-1   0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR05
+U 1 1 5A37A392
+P 7650 2550
+F 0 "#PWR05" H 7650 2400 50  0001 C CNN
+F 1 "+3.3V" H 7650 2690 50  0000 C CNN
+F 2 "" H 7650 2550 50  0001 C CNN
+F 3 "" H 7650 2550 50  0001 C CNN
+	1    7650 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR06
+U 1 1 5A37A398
+P 7650 2850
+F 0 "#PWR06" H 7650 2600 50  0001 C CNN
+F 1 "GND" H 7650 2700 50  0000 C CNN
+F 2 "" H 7650 2850 50  0001 C CNN
+F 3 "" H 7650 2850 50  0001 C CNN
+	1    7650 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 2750 7650 2750
+Wire Wire Line
+	7650 2750 7650 2850
+Wire Wire Line
+	7550 2650 7650 2650
+Wire Wire Line
+	7650 2650 7650 2550
+$Comp
+L +3.3V #PWR07
+U 1 1 5A37A3B6
+P 7650 4450
+F 0 "#PWR07" H 7650 4300 50  0001 C CNN
+F 1 "+3.3V" H 7650 4590 50  0000 C CNN
+F 2 "" H 7650 4450 50  0001 C CNN
+F 3 "" H 7650 4450 50  0001 C CNN
+	1    7650 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR08
+U 1 1 5A37A3BC
+P 7650 4750
+F 0 "#PWR08" H 7650 4500 50  0001 C CNN
+F 1 "GND" H 7650 4600 50  0000 C CNN
+F 2 "" H 7650 4750 50  0001 C CNN
+F 3 "" H 7650 4750 50  0001 C CNN
+	1    7650 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 4650 7650 4650
+Wire Wire Line
+	7650 4650 7650 4750
+Wire Wire Line
+	7550 4550 7650 4550
+Wire Wire Line
+	7650 4550 7650 4450
+$Comp
+L CONN_01X01 J10
+U 1 1 5A390225
+P 9100 3450
+F 0 "J10" H 9100 3550 50  0000 C CNN
+F 1 "FREETRONICS_LOGO" V 9200 3450 50  0000 C CNN
+F 2 "libs:LOGO_FREETRONICS_14mm" H 9100 3450 50  0001 C CNN
+F 3 "" H 9100 3450 50  0001 C CNN
+	1    9100 3450
+	1    0    0    -1  
+$EndComp
+NoConn ~ 8900 3450
+$EndSCHEMATC
