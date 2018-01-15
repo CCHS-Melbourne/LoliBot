@@ -7,7 +7,7 @@ echo '### Flash microPython ###'
 esptool.py --chip esp32 --port $AMPY_PORT write_flash -z 0x1000 firmware/esp32-20171122-v1.9.2-443-g236297f4.bin
 
 echo '### Remove boot.py ###'
-ampy rm boot.py
+ampy rm boot.py >/dev/null 2>&1  # TODO: Fix this command failing 
 
 echo '### Make directories ###'
 ampy mkdir configuration
