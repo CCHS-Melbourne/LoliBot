@@ -1,4 +1,4 @@
-# lib/aiko/led.py: version = "2018-01-14 14:00"
+# lib/aiko/led.py: version = "2018-01-16 09:00"
 #
 # Usage
 # ~~~~~
@@ -25,12 +25,13 @@ from machine  import Pin
 from neopixel import NeoPixel
 
 import urandom
-apa106  = False
-dim     = 0.1  # 100% = 1.0
-full    = 255
-length  = None
-np      = None
-zigzag  = False
+apa106   = False
+dim      = 0.1  # 100% = 1.0
+full     = 255
+length   = None
+length_x = None
+np       = None
+zigzag   = False
 
 colors = {
   "black":  (   0,    0,    0),
@@ -84,21 +85,22 @@ def random_position():
 
 def set(color, x=0, write=False):
   if apa106: color = (color[1], color[0], color[2])
-  if zigzag and (x // 32) % 2:
-    x = 32 * (x // 32 + 1) - (x - 32 * (x // 32)) - 1
-  np[x] = apply_dim(color)
+  if zigzag and (x // length_x) % 2:
+    x = length_x * (x // length_x + 1) - (x - length_x * (x // length_x)) - 1
+  if x < length: np[x] = apply_dim(color)
   if write: np.write()
 
 def set_random_pixel(write=False):
   set(random_color(), random_position(), write)
 
 def set_xy(color, x=0, y=0, write=False):
-  set(color, x + y * 32, write)
+  set(color, x + y * length_x, write)
 
 def initialise(settings):
-  global apa106, length, np, zigzag
+  global apa106, length, length_x, np, zigzag
 
   length = linear(settings["dimension"])
+  length_x = settings["dimension"][0]
   np = NeoPixel(Pin(settings["neopixel_pin"]), length, timing=True)
   if "apa106" in settings: apa106 = settings["apa106"]
   if "zigzag" in settings: zigzag = settings["zigzag"]
