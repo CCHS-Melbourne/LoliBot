@@ -68,19 +68,21 @@ def initialise(settings, i2c_bus):
 
     try:
         mpu = MPU9250(i2c_bus, settings["accel_max_g"], settings["i2c_addr"])
+        print("MPU9250 initialised")
     except MPU9250Exception:
         print("MPU9250 module not detected.")
-    print("MPU9250 initialised")
 
 def readZ():
     if mpu:
         return mpu.readZ()
-    return 0
+    return (0,0)
 
 # FIXME: Replace with general timer implementation
 def accel_check():
     global time_last_check, maxZ, minZ
-    time_now = time.ticks_ms()
+
+    if mpu is None:
+        return
 
     # Track the max/min accelerometer reading between updates
     # and output them once per second
@@ -88,6 +90,7 @@ def accel_check():
     maxZ = max(curZ[0], maxZ)
     minZ = min(curZ[0], minZ)
 
+    time_now = time.ticks_ms()
     if time_now >= time_last_check + 1000:
         time_last_check = time_now
         print ("Accel Z {} min {} max {}".format(readZ(), minZ, maxZ))
