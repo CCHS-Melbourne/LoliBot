@@ -39,8 +39,11 @@ def on_message(topic, payload_in):
   payload_in = payload_in.decode()
 
   for message_handler in message_handlers:
-    handled = message_handler(topic, payload_in)
-    if handled: break
+    try:
+      handled = message_handler(topic, payload_in)
+      if handled: break
+    except Exception as exception:
+      print("MQTT: handler {}() exception {} ".format (message_handler.__name__, str(exception)))
 
 def on_message_eval(topic, payload_in):
   try:
