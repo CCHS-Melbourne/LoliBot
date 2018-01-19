@@ -1,4 +1,4 @@
-# lib/lolibot.py: version: 2018-01-14 14:00
+# lib/lolibot.py: version: 2018-01-19 23:15
 #
 # Usage
 # ~~~~~
@@ -36,6 +36,8 @@ right_motor2 = None
 duty_cycle_max = 1023
 duty_cycle_min = 200
 pwm_frequency = 30
+
+i2c_bus = None
 
 motor_commands = {
   "stop":    (   0,    0,    0,    0),
@@ -76,6 +78,7 @@ def initialise_motor(settings, motor_pin_name):
 def initialise(settings):
   global duty_cycle_max, duty_cycle_min, pwm_frequency
   global left_motor1, left_motor2, right_motor1, right_motor2
+  global i2c_bus
 
   if "duty_cycle_max" in settings:
     duty_cycle_max = int(settings["duty_cycle_max"])
@@ -93,3 +96,4 @@ def initialise(settings):
 
   scl = settings["scl_pin"]
   sda = settings["sda_pin"]
+  i2c_bus = machine.I2C(scl=machine.Pin(scl), sda=machine.Pin(sda))
