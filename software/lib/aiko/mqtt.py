@@ -1,4 +1,4 @@
-# lib/aiko/mqtt.py: version = "2018-01-14 14:00"
+# lib/aiko/mqtt.py: version = "2018-01-19 23:00"
 #
 # Usage
 # ~~~~~
@@ -25,6 +25,7 @@ keepalive = 60
 message_handlers = []
 ping_counter = 0
 time_last_ping = 0
+state_topic = None
 
 def add_message_handler(message_handler):
   message_handlers.append(message_handler)
@@ -52,6 +53,10 @@ def on_message_eval(topic, payload_in):
     print("MQTT: eval(): " + str(exception))
   return True
 
+def set_state(state_msg):
+  global client, state_topic
+  client.publish(state_topic, state_msg, retain=True)
+
 def ping_check():
   global ping_counter, time_last_ping
   time_now = time.ticks_ms()
@@ -66,19 +71,22 @@ def ping_check():
       print("GC:", gc.mem_free(), gc.mem_alloc())   # 72272 23728
 
 def initialise(settings):
-  global client, keepalive
+  global client, keepalive, state_topic
 
   client_id = get_unique_id()
   keepalive = settings["keepalive"]
   topic_path = settings["topic_path"]
+  state_topic = topic_path + "/state"
 
   client = MQTTClient(client_id,
     settings["host"], settings["port"], keepalive=keepalive)
 
   client.set_callback(on_message)
-  client.set_last_will(topic_path + "/state", "nil")
+  client.set_last_will(state_topic, "nil")
   client.connect()
 
   for topic in settings["topic_subscribe"]: client.subscribe(topic)
+
+  set_state ("alive")
 
   print("Connected to MQTT: %s: %s" % (settings["host"], topic_path))
