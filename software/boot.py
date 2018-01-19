@@ -1,6 +1,6 @@
 # This file is executed on every boot (including wake-boot from deepsleep)
 #
-# boot.py: version: 2018-01-14 14:00
+# boot.py: version: 2018-01-20 00:45
 #
 # Usage
 # ~~~~~
@@ -28,6 +28,10 @@ import time
 while not aiko.wifi.connect(configuration.wifi.ssids): time.sleep(0.5)
 aiko.led.set(aiko.led.colors["blue"], 0, True)
 
+import configuration.mpu9250
+import mpu9250
+mpu9250.initialise(configuration.mpu9250.settings, lolibot.i2c_bus)
+
 # import aiko.services
 # import configuration.services
 # aiko.services.initialise(configuration.services.settings)
@@ -46,4 +50,5 @@ aiko.led.set(aiko.led.colors["green"], 0, True)
 
 while True:
   aiko.mqtt.ping_check()        # TODO: Create a general timer handler
+  mpu9250.accel_check()
   aiko.mqtt.client.check_msg()  # Then make this a blocking call

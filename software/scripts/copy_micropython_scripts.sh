@@ -23,6 +23,7 @@ done
 echo '### Copy configuration/*.py ###'
 ampy put configuration/led.py      configuration/led.py
 ampy put configuration/lolibot.py  configuration/lolibot.py
+ampy put configuration/mpu9250.py  configuration/mpu9250.py
 ampy put configuration/mqtt.py     configuration/mqtt.py
 ampy put configuration/services.py configuration/services.py
 ampy put configuration/wifi.py     configuration/wifi.py
