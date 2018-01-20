@@ -1,5 +1,10 @@
 # LoliBot - The ESP32 Based Soccer bot.
 
+Quick links ...
+
+  * [Hardware assembly](http://www.openhardwareconf.org/wiki/LoliBot-Assembly)
+  * [Software installation and usage](software)
+
 Welcome to the 2018 linux.conf.au Open Hardware Project.  You can see information about this and other MiniConfs at <http://www.openhardwareconf.org/wiki/Main_Page>.
 
 If you're attending the assembly workshop at Linux.conf.au 2018, the place to start is <http://www.openhardwareconf.org/wiki/LoliBot>
@@ -35,7 +40,7 @@ Assembly instructions for the kit are at <http://www.openhardwareconf.org/wiki/L
 
 All the usual ESP32 development options apply to the LoliBot ...
 
- * MicroPython
+ * microPython scripts
  * Arduino IDE sketches
  * Native ESP-IDF FreeRTOS firmware
 
