@@ -33,16 +33,17 @@ Assembly instructions for the kit are at <http://www.openhardwareconf.org/wiki/L
 
 ## Software
 
-The Lolibot can be programmed like a normal ESP32 - so there are several options for firmware style:
+All the usual ESP32 development options apply to the LoliBot ...
+
  * MicroPython
- * Arduino sketches
- * native ESP-IDF FreeRTOS firmware
+ * Arduino IDE sketches
+ * Native ESP-IDF FreeRTOS firmware
 
-This repository contains a sample MicroPython firmware as a starting point.
+We've chosen to focus on using microPython to provide a simple, yet
+capable entry point for newcomers to robotics and embedded computers.
 
-There are instructions on using this firmware <http://www.openhardwareconf.org/wiki/LoliBot-Software>
-
-For more details and information on modifying the firmware, see the software/ sub-directory.
+The [software sub-directory has instructions](software)
+ on installing and developing software for the LoliBot.
 
 ## LICENSE
 
