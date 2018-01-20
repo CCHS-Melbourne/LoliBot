@@ -40,7 +40,7 @@ Assembly instructions for the kit are at <http://www.openhardwareconf.org/wiki/L
 
 All the usual ESP32 development options apply to the LoliBot ...
 
- * microPython scripts
+ * [microPython scripts](software)
  * Arduino IDE sketches
  * Native ESP-IDF FreeRTOS firmware
 
