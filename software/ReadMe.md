@@ -14,8 +14,8 @@ personal preferences in their set-up.  The following instructions aim
 to cover a reasonable spread of environments, but we can't provide
 specific step-by-step instructions for every situation.
 
-*If you are having problems during the OHMC workshop, please ask
-one of the organisers or friendly and experienced helpers for assistance*
+**If you are having problems during the OHMC workshop, please ask
+one of the organisers or friendly and experienced helpers for assistance**
 
 # Development (host) computer software installation
 
