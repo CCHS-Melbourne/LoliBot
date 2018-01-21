@@ -50,8 +50,8 @@ If not, you'll have the default Apple Python installation (old) and no PIP.
 
     sudo easy_install pip
 
-If that fails, then using Homebrew to install and manage Python
-is the way to go.  Note: This will take awhile, e.g a coffee break.
+If that fails, then using [Homebrew](https://brew.sh) to install and manage
+Python is the way to go.  Note: This will take awhile, e.g a coffee break.
 
     brew install python  # Includes PIP (maybe called "pip2")
 
@@ -112,10 +112,11 @@ You can get the Windows CH340 driver from
 
 ## 3. Install ESPTool (firmware installer with miniterm.py)
 
-The ESPtool package allows you to install firmware, such as the microPython
-interpreter, on to your ESP32 microcontroller.  This package also contains
-the "miniterm.py" utility, which acts like a serial terminal console that
-allows REPL (shell-like) access to microPython running on your ESP32.
+The ESPTool package allows you to install firmware, such as the microPython
+interpreter, on to your ESP32 microcontroller.  This package also contains the
+"miniterm.py" program, which acts like a serial terminal console that allows
+[REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
+(shell-like) access to microPython running on your ESP32.
 
     pip install esptool
     esptool.py -h    # ESP8266 ROM Bootloader Utility
@@ -124,29 +125,33 @@ allows REPL (shell-like) access to microPython running on your ESP32.
 
 Note: Other good serial terminal choices, besides "miniterm.py" are ...
 
-- Linux or Mac OS X: "screen"
-- Windows: ["putty"](http://chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+- Linux or Mac OS X: screen
+- Windows: [putty](http://chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 
 Make sure your serial terminal is configured to run at 115,200 baud and with
 "flow control" disabled (or set to "none").
 
-## 4. Install AMPY (file transfer utility)
+## 4. Install AMPY (file transfer program)
 
-The AMPY utility allows you to inspect the microPython filesystem, send and
-retrieve files, make directories and delete files or directories.
+The [ampy](https://github.com/adafruit/ampy) program allows you to inspect
+the microPython filesystem, send and retrieve files, make directories and
+delete files or directories.
 
     pip install adafruit-ampy
+    ampy --help
     AMPY_DELAY=1     # Workaround for reliable interaction with raw REPL
-    ampy --help 
+    AMPY_PORT=/dev/ttyUSB0               # Linux
+    AMPY_PORT=/dev/tty.wchusbserial1410  # Mac OS X
+    set AMPY_PORT=COM3                   # Windows
 
 If "ampy" is hanging or crashing, ensure that the AMPY_DELAY environment
 variable is set to the value "1".  Also, double-check that the ESP32 serial
-device exists and the path is correct, as follows ...
+device exists and that the path is correct, as follows ...
 
     ls -l /dev/tty.wchusbserial*
     echo $AMPY_PORT
 
-... both should be the same file pathname.
+... both should be the same device file pathname.
 
 Note: AMPY_DELAY appears to be needed for the Wemos Lolin32 Lite.
 Other ESP32 development boards, often those that don't use the CH340,
@@ -156,15 +161,174 @@ without it.
 ## 5. Install rshell (combined file transfer and microPython REPL interaction)
 
 The installation of "rshell" is optional.  It relies upon Python version 3.4
-or higher.  This utility combines the functionality a serial terminal and
+or higher.  This program combines the functionality if a serial terminal and
 "ampy".  It is worth trying out.  However, "rshell" works less well on the
-Wemos Lolin32 Lite.  So, you might be better trying it out on different ESP32
-device that doesn't use a CH340 USB serial chip ... before making up your mind.
+Wemos Lolin32 Lite.  So, you might be better trying it out on a different ESP32
+development board that doesn't use a CH340 USB serial chip ... before making up
+your mind.
 
     pip install rshell
     rshell -h
 
+Another similar program to try out is
+[mpfshell](https://github.com/wendlers/mpfshell).
+
 ---
+
 This concludes the development (host) computer software installation.
 Now let's use these development tools to set-up microPython on the ESP32.
+
 ---
+
+# LoliBot (ESP32) microPython firmware installation
+
+The microPython firmware is installed on the ESP32 using ESPTool to
+erase the microcontroller flash memory and then write the firmware image.
+
+The latest version of the microPython firmware image can be found here ...
+
+    http://micropython.org/downloads#esp32
+
+A recent version (Jan 2018) has been included as part of this repository.
+
+The required ESPTool commands ...
+
+    esptool.py --chip esp32 --port $AMPY_PORT erase_flash
+    esptool.py --chip esp32 --port $AMPY_PORT write_flash -z 0x1000 firmware/esp32-20180120-v1.9.3-240-ga275cb0f.bin
+
+... can be more conveniently run in a shell script that completely installs
+all of the LoliBot software (see next section).
+
+Once the microPython firmware image is installed, you can reboot the ESP32
+and use a serial terminal program to enter and execute Python statements
+interactively at the ">>>" prompt.
+
+# LoliBot (ESP32) microPython application installation
+
+By this stage, we are now ready to install the complete collection
+of software that will operate your LoliBot hardware.
+
+*To prevent accidental robot run-aways, ensure that the LoliBot power
+switch is OFF* ... or that you have excellent robot catching reflexes !
+
+The following commands flash firmware and copy the entire LoliBot software
+to the ESP32.  This is a convenient "one step" command to get your LoliBot
+back into a known state, if you've made lots of ad-hoc "ampy put" commands
+and have forgotten exactly what is installed on the ESP32.
+
+    export AMPY_PORT=_SERIAL_DEVICE_PATH_
+    export AMPY_DELAY=1
+    scripts/flash_lolibot.sh  # Takes around 2 to 3 minutes ... grab a coffee !
+
+Since all the LoliBot source files have a "version header" ... the following
+script uses "ampy get" to retrieve the microPython source files and display
+just the "version header" for each file for the purposes of checking.
+
+    scripts/check_version.sh
+
+## Configure LoliBot Wi-Fi
+
+The final installation steps are to configure the LoliBot settings
+for Wi-Fi and MQTT.
+
+*So that you can see the RGB LED boot status, ensure that the LoliBot
+power switch is ON.  Raise the LoliBot wheels off the ground, then
+the robot can't accidentally run away from you.*
+
+Due to the design, whenever the ESP32 microcontroller is "reset",
+the motors tend to consistently run for just under a second.
+
+The default LoliBot RGB LED boot behavior is as follows ...
+
+    Red: Waiting for Wi-Fi connection
+    Blue: Wi-Fi connected, waiting for MQTT connection
+    Green: Wi-Fi connected and MQTT connected
+
+Failure to progress from red to blue to green indicates that some sort
+of problem has occurred.  Possibly, the Wi-FI network credentials are
+incorrect.
+
+Copy, edit and transfer the Wi-Fi configuration file ...
+
+    cp configuration/wifi.py.template configuration/wifi.py
+    vi configuration/wifi.py
+      ssids = [
+        ("linuxconfau", "??????????")
+      ]
+    ampy put configuration/wifi.py configuration/wifi.py
+
+Note: Both "ampy" and "miniterm.py" (or any serial terminal program)
+can not be run at the same time, otherwise they contend for the same
+USB serial device port.
+
+Whilst watching the serial console output, reboot the ESP32,
+by pressing the "reset" button
+
+    miniterm.py $AMPY_PORT 115200
+
+Successful Wi-Fi console output.
+Note: RGB LED should start "red" and change to "blue".
+
+    (979) wifi: STA_START
+    (3389) network: event 1
+    Connecting to meshthing
+    Waiting for Wi-Fi
+    (4819) wifi: n:11 0, o:1 0, ap:255 255, sta:11 0, prof:1
+    (5379) wifi: state: init -> auth (b0)
+    (5379) wifi: state: auth -> assoc (0)
+    (5389) wifi: state: assoc -> run (10)
+    (5409) wifi: connected with meshthing, channel 11
+    (5409) network: event 4
+    (8389) wifi: pm start, type:0
+    (9349) event: sta ip: 192.168.1.5, mask: 255.255.255.0, gw: 192.168.1.1
+    (9349) network: GOT_IP
+    Connected to Wi-Fi
+
+Failure to connect to Wi-Fi, due to incorrect SSID.  Note: RGB LED stays "red".
+Edit and transfer "configuration/wifi.py", then try rebooting again.
+
+    (998) wifi: STA_START
+    (3408) network: event 1
+    (6418) network: event 1
+
+Failure to connect to Wi-Fi, due to incorrect password.
+Note: RGB LED stays "red".
+Edit and transfer "configuration/wifi.py", then try rebooting again.
+
+    (979) wifi: STA_START
+    (3389) network: event 1
+    Connecting to meshthing
+    Waiting for Wi-Fi
+    (4819) wifi: n:11 0, o:1 0, ap:255 255, sta:11 0, prof:1
+    (5379) wifi: state: init -> auth (b0)
+    (5389) wifi: state: auth -> assoc (0)
+    (6389) wifi: state: assoc -> init (4)
+    (6389) wifi: n:11 0, o:11 0, ap:255 255, sta:11 0, prof:1
+    (6389) wifi: STA_DISCONNECTED, reason:4
+
+EXPLAIN THE ESP32 RESET BUTTON ... AND ... RESET WHEN USING SCREEN / MINITERM
+WATCH CONSOLE
+
+## Configure LoliBot MQTT
+
+- vi configuration/mqtt.py
+    # "host":            "iot.eclipse.org",
+      "host":            "192.168.1.4"  # LET PEOPLE KNOW, IF LOCAL ?
+- ampy put configuration/mqtt.py configuration/mqtt.py
+
+# LoliBot application overview
+
+- Move to page 2
+
+WHAT DOES A GOOD CONSOLE LOG LOOK LIKE ?  A BAD ONE ?
+NOTE: (MILLISECONDS) SINCE BOOT
+LED BLUE -> GREEN
+- Move to next step
+
+WI-FI SSID NOT FOUND
+LED STAYS BLUE
+- Edit configuration/wifi.py, re-copy, etc
+
+WI-FI PASSWORD INCORRECT
+LED STAYS BLUE
+- Edit configuration/wifi.py, re-copy, etc
