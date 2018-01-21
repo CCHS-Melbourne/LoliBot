@@ -62,7 +62,7 @@ def on_message_lolibot(topic, payload_in):
   tokens = payload_in.split()
   if len(tokens) == 2 and tokens[0] == "freq":
     pwm_frequency = int(tokens[1])
-    print("motor freq: " + int(pwm_frequency))
+    print("motor freq: " + str(pwm_frequency))
     return True
 
   return False
