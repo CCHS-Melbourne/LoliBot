@@ -8,6 +8,15 @@ microPython is eliminating the need for a complex compiler tool-chain
 and development environment on your host computer.  You may choose your
 favorite source code editor and other utilities that best suit your needs.
 
+During the LCA2018 Open Hardware MiniConference (OHMC), we anticipate a
+large variety of machines, operating systems, Linux distributions and
+personal preferences in their set-up.  The following instructions aim
+to cover a reasonable spread of environments, but we can't provide
+specific step-by-step instructions for every situation.
+
+*If you are having problems during the OHMC workshop, please ask
+one of the organisers or friendly and experienced helpers for assistance*
+
 # Development (host) computer software installation
 
 The recommended tools are all written in Python.  If you are familar with
@@ -24,7 +33,8 @@ depending upon your operating system, you'll have different steps to perform.
 ### Linux: Python and PIP
 
 Batteries are included ... you are probably good to go.
-Python and PIP are likely installed ... or you are reasonably self-sufficient.
+Python and PIP are likely installed ... or you are reasonably self-sufficient
+and are comfortable with your personal choice of Linux distribution.
 
 ### Mac OS X: Python and PIP
 
@@ -36,7 +46,7 @@ If not, you'll have the default Apple Python installation (old) and no PIP.
 If that fails, then using Homebrew to install and manage Python
 is the way to go.  Note: This will take awhile, e.g a coffee break.
 
-    brew install python  # Includes PIP
+    brew install python  # Includes PIP (maybe called "pip2")
 
 ### Windows: Python and PIP
 
@@ -48,8 +58,8 @@ Fortunately, Nick Moore has you covered with his
 
 Development interaction with the ESP32 occurs over a USB serial connection.
 The ESP32 development board chosen for the Lolibot is the
-[Lolin32 Lite](https://wiki.wemos.cc/products:lolin32:lolin32_lite).
-The Lolin32 Lite uses the CH340 USB serial interface chip.
+[Wemos Lolin32 Lite](https://wiki.wemos.cc/products:lolin32:lolin32_lite).
+The Wemos Lolin32 Lite uses the CH340 USB serial interface chip.
 
 If you are already familar with developing for embedded computers,
 then you are likely on top of the USB serial driver and configuration
@@ -57,7 +67,7 @@ required on your development machine.
 
 ### Linux: USB serial driver is probably included
 
-Linux already includes the CH340 USB serial driver.
+Most Linux distributions already include the CH340 USB serial driver.
 However, you may need to give yourself permission to access the serial device.
 
     sudo adduser $USER dialout
@@ -67,14 +77,19 @@ You may need to log out and then log back in again for this change to
 have effect.
 
 When you plug your LoliBot (ESP32) into the USB port, it should appear as
-/dev/ttyUSB0 (or similar).
+"/dev/ttyUSB0" (or similar).
+
+    ls -l /dev/ttyUSB*
 
 ### Mac OS X: USB serial driver needs to be installed
 
 Mac OS X requires the CH340 USB serial driver.
-However, you may have installed them previously.  If you plug your LoliBot
-into the USB port ... if you can see the file /dev/tty.wchusbserial1410
-(or similar) then you can move on to the next step.
+However, you may have installed the driver  previously.
+If you plug your LoliBot into the USB port ...
+if you can see the file "/dev/tty.wchusbserial1410" (or similar)
+then you can move on to the next step.
+
+    ls -l /dev/tty.wchusbserial*
 
 Otherwise, install the [Mac OS X CH340 driver](https://wiki.wemos.cc/downloads)
 Finally, test plugging in the LoliBot and look for the serial device as above.
