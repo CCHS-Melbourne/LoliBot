@@ -40,7 +40,8 @@ settings["topic_subscribe"].append(settings["topic_path"] + "/in")
 aiko.mqtt.initialise(settings)
 aiko.mqtt.add_message_handler(aiko.led.on_message_led)
 aiko.mqtt.add_message_handler(lolibot.on_message_lolibot)
-aiko.mqtt.add_message_handler(aiko.mqtt.on_message_eval)  # must be last
+# Handy to eval() Python, but a security risk !
+# aiko.mqtt.add_message_handler(aiko.mqtt.on_message_eval)  # must be last
 aiko.led.set(aiko.led.colors["green"], 0, True)
 
 while True:
