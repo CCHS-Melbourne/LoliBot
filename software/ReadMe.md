@@ -189,7 +189,8 @@ The latest version of the microPython firmware image can be found here ...
 
     http://micropython.org/downloads#esp32
 
-A recent version (Jan 2018) has been included as part of this repository.
+A recent firmware version (January 2018) has been included as part of
+this repository.
 
 The required ESPTool commands ...
 
@@ -208,45 +209,46 @@ interactively at the ">>>" prompt.
 By this stage, we are now ready to install the complete collection
 of software that will operate your LoliBot hardware.
 
-*To prevent accidental robot run-aways, ensure that the LoliBot power
-switch is OFF* ... or that you have excellent robot catching reflexes !
+**To prevent accidental robot run-aways, ensure that the LoliBot power
+switch is OFF** ... or that you have excellent robot catching reflexes !
 
-The following commands flash firmware and copy the entire LoliBot software
-to the ESP32.  This is a convenient "one step" command to get your LoliBot
-back into a known state, if you've made lots of ad-hoc "ampy put" commands
-and have forgotten exactly what is installed on the ESP32.
+The following commands flash the microPython firmware and copy the entire
+LoliBot software to the ESP32.  This is a convenient "one step" command
+to get your LoliBot back into a known state, if you've made lots of ad-hoc
+"ampy put" commands and have forgotten exactly what is installed on the ESP32.
 
-    export AMPY_PORT=_SERIAL_DEVICE_PATH_
+    export AMPY_PORT=SERIAL_DEVICE_FILE_PATH
     export AMPY_DELAY=1
     scripts/flash_lolibot.sh  # Takes around 2 to 3 minutes ... grab a coffee !
 
 Since all the LoliBot source files have a "version header" ... the following
-script uses "ampy get" to retrieve the microPython source files and display
-just the "version header" for each file for the purposes of checking.
+script uses "ampy get" to retrieve the microPython source files from the
+ESP32 and display just the "version header" for each file for the purposes
+of checking.
 
     scripts/check_version.sh
 
-## Configure LoliBot Wi-Fi
+# Configure LoliBot Wi-Fi
 
 The final installation steps are to configure the LoliBot settings
 for Wi-Fi and MQTT.
 
-*So that you can see the RGB LED boot status, ensure that the LoliBot
+**So that you can see the RGB LED boot status, ensure that the LoliBot
 power switch is ON.  Raise the LoliBot wheels off the ground, then
-the robot can't accidentally run away from you.*
+the robot can't accidentally run away from you.**
 
 Due to the design, whenever the ESP32 microcontroller is "reset",
 the motors tend to consistently run for just under a second.
 
 The default LoliBot RGB LED boot behavior is as follows ...
 
-    Red: Waiting for Wi-Fi connection
-    Blue: Wi-Fi connected, waiting for MQTT connection
-    Green: Wi-Fi connected and MQTT connected
+- Red: Waiting for Wi-Fi connection
+- Blue: Wi-Fi connected, waiting for MQTT connection
+- Green: Wi-Fi connected and MQTT connected, ready to go
 
-Failure to progress from red to blue to green indicates that some sort
-of problem has occurred.  Possibly, the Wi-FI network credentials are
-incorrect.
+Failure of the RGB LED to progress from _red_ to _blue_ to _green_ indicates
+that some sort of problem has occurred.  Possibly, the Wi-FI network
+credentials are incorrect.
 
 Copy, edit and transfer the Wi-Fi configuration file ...
 
@@ -259,15 +261,16 @@ Copy, edit and transfer the Wi-Fi configuration file ...
 
 Note: Both "ampy" and "miniterm.py" (or any serial terminal program)
 can not be run at the same time, otherwise they contend for the same
-USB serial device port.
+USB serial device port.  So, always stop your serial terminal program
+before running the "ampy" command.
 
 Whilst watching the serial console output, reboot the ESP32,
 by pressing the "reset" button
 
     miniterm.py $AMPY_PORT 115200
 
-Successful Wi-Fi console output.
-Note: RGB LED should start "red" and change to "blue".
+Example: Successful Wi-Fi connection console output.
+Note: RGB LED should start _red_ and change to _blue_.
 
     (979) wifi: STA_START
     (3389) network: event 1
@@ -284,16 +287,17 @@ Note: RGB LED should start "red" and change to "blue".
     (9349) network: GOT_IP
     Connected to Wi-Fi
 
-Failure to connect to Wi-Fi, due to incorrect SSID.  Note: RGB LED stays "red".
-Edit and transfer "configuration/wifi.py", then try rebooting again.
+Example: Failure to connect to Wi-Fi, due to incorrect SSID.
+Note: RGB LED stays _red_.  Edit and transfer "configuration/wifi.py",
+then try rebooting again.
 
     (998) wifi: STA_START
     (3408) network: event 1
     (6418) network: event 1
 
-Failure to connect to Wi-Fi, due to incorrect password.
-Note: RGB LED stays "red".
-Edit and transfer "configuration/wifi.py", then try rebooting again.
+Example: Failure to connect to Wi-Fi, due to incorrect password.
+Note: RGB LED stays _red_.  Edit and transfer "configuration/wifi.py",
+then try rebooting again.
 
     (979) wifi: STA_START
     (3389) network: event 1
@@ -306,29 +310,67 @@ Edit and transfer "configuration/wifi.py", then try rebooting again.
     (6389) wifi: n:11 0, o:11 0, ap:255 255, sta:11 0, prof:1
     (6389) wifi: STA_DISCONNECTED, reason:4
 
-EXPLAIN THE ESP32 RESET BUTTON ... AND ... RESET WHEN USING SCREEN / MINITERM
-WATCH CONSOLE
+Note: Typically, when a serial terminal program, such as "miniterm.py",
+is started ... it will "reset" the ESP32.
 
-## Configure LoliBot MQTT
+# Configure LoliBot MQTT
 
-- vi configuration/mqtt.py
-    # "host":            "iot.eclipse.org",
-      "host":            "192.168.1.4"  # LET PEOPLE KNOW, IF LOCAL ?
-- ampy put configuration/mqtt.py configuration/mqtt.py
+Once the LoliBot is successfully connecting to the Wi-Fi network,
+it is time to configure MQTT.
 
-# LoliBot application overview
+There are a couple of options ...
 
-- Move to page 2
+- Connect to a third-party hosted, public MQTT server, such as
+  - "iot.eclipse.org"
+  - "test.mosquitto.org"
+- Connect to a local MQTT server running on your laptop
 
-WHAT DOES A GOOD CONSOLE LOG LOOK LIKE ?  A BAD ONE ?
-NOTE: (MILLISECONDS) SINCE BOOT
-LED BLUE -> GREEN
-- Move to next step
+Copy, edit and transfer the MQTT configuration file ...
 
-WI-FI SSID NOT FOUND
-LED STAYS BLUE
-- Edit configuration/wifi.py, re-copy, etc
+    vi configuration/mqtt.py
+      "host": "iot.eclipse.org",  # Third-party hosted, public MQTT server
+    # "host": "192.168.1.4"       # Local MQTT server
+    ampy put configuration/mqtt.py configuration/mqtt.py
 
-WI-FI PASSWORD INCORRECT
-LED STAYS BLUE
-- Edit configuration/wifi.py, re-copy, etc
+Whilst watching the serial console output, reboot the ESP32,
+by pressing the "reset" button
+
+    miniterm.py $AMPY_PORT 115200
+
+Example: Successful MQTT connection console output.
+Note: RGB LED should start _red_, change to _blue_ and then _green_.
+
+    (998) wifi: STA_START
+    (3408) network: event 1
+    Connecting to meshthing
+    Waiting for Wi-Fi
+    (4828) wifi: n:11 0, o:1 0, ap:255 255, sta:11 0, prof:1
+    (5388) wifi: state: init -> auth (b0)
+    (5388) wifi: state: auth -> assoc (0)
+    (5388) wifi: state: assoc -> run (10)
+    (5408) wifi: connected with meshthing, channel 11
+    (5418) network: event 4
+    (8388) wifi: pm start, type:0
+    (9368) event: sta ip: 192.168.1.6, mask: 255.255.255.0, gw: 192.168.1.1
+    (9368) network: GOT_IP
+    Connected to Wi-Fi
+    (9718) modsocket: Initializing
+    Connected to MQTT: 192.168.1.2: lolibot/esp32_000000
+
+Example: Failure to connect to MQTT, due to incorrect MQTT host IP address.
+Note: RGB LED starts _red_ and then stays _blue_.
+Edit and transfer "configuration/mqtt.py", then try rebooting again.
+
+    Connected to Wi-Fi
+    (9718) modsocket: Initializing
+    Traceback (most recent call last):
+      File "boot.py", line 40, in <module>
+      File "/lib/aiko/mqtt.py", line 77, in initialise
+      File "/lib/umqtt/simple.py", line 58, in connect
+    OSError: [Errno 104] ECONNRESET
+    OSError: [Errno 2] ENOENT
+
+---
+
+Now that your LoliBot is connected to Wi-Fi and MQTT, it is time to move on to
+[LoliBot microPython software description](documentation/description.md).
