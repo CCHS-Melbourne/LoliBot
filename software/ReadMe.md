@@ -94,7 +94,7 @@ Mac OS X requires the CH340 USB serial driver.
 However, you may have installed the driver previously.
 If you plug your LoliBot into the USB port ...
 and you can see the file "/dev/tty.wchusbserial1410" (or similar)
-then you can move on to the next step.
+then you can move on to the next step 3.
 
     ls -l /dev/tty.wchusbserial*  # Check if LoliBot appears as a serial device
 
@@ -161,11 +161,11 @@ without it.
 ## 5. Install rshell (combined file transfer and microPython REPL interaction)
 
 The installation of "rshell" is optional.  It relies upon Python version 3.4
-or higher.  This program combines the functionality if a serial terminal and
+or higher.  This program combines the functionality of a serial terminal and
 "ampy".  It is worth trying out.  However, "rshell" works less well on the
 Wemos Lolin32 Lite.  So, you might be better trying it out on a different ESP32
 development board that doesn't use a CH340 USB serial chip ... before making up
-your mind.
+your mind about whether you like using "rshell".
 
     pip install rshell
     rshell -h
@@ -202,7 +202,9 @@ all of the LoliBot software (see next section).
 
 Once the microPython firmware image is installed, you can reboot the ESP32
 and use a serial terminal program to enter and execute Python statements
-interactively at the ">>>" prompt.
+interactively at the ">>>" prompt.  **This is very cool !**  It enables
+you to play, experiment and diagnose problems in an easy, yet powerful
+manner.
 
 # LoliBot (ESP32) microPython application installation
 
@@ -213,12 +215,14 @@ of software that will operate your LoliBot hardware.
 switch is OFF** ... or that you have excellent robot catching reflexes !
 
 The following commands flash the microPython firmware and copy the entire
-LoliBot software to the ESP32.  This is a convenient "one step" command
+LoliBot software to the ESP32.  This is also a convenient "one step" command
 to get your LoliBot back into a known state, if you've made lots of ad-hoc
 "ampy put" commands and have forgotten exactly what is installed on the ESP32.
 
-    export AMPY_PORT=SERIAL_DEVICE_FILE_PATH
     export AMPY_DELAY=1
+    export AMPY_PORT=/dev/ttyUSB0               # Linux
+    export AMPY_PORT=/dev/tty.wchusbserial1410  # Mac OS X
+    set AMPY_PORT=COM3                          # Windows
     scripts/flash_lolibot.sh  # Takes around 2 to 3 minutes ... grab a coffee !
 
 Since all the LoliBot source files have a "version header" ... the following
@@ -235,10 +239,9 @@ for Wi-Fi and MQTT.
 
 **So that you can see the RGB LED boot status, ensure that the LoliBot
 power switch is ON.  Raise the LoliBot wheels off the ground, then
-the robot can't accidentally run away from you.**
-
-Due to the design, whenever the ESP32 microcontroller is "reset",
-the motors tend to consistently run for just under a second.
+the robot can't accidentally run away from you.**  Due to the design,
+whenever the ESP32 microcontroller is "reset", the motors tend to
+consistently run for just under a second.
 
 The default LoliBot RGB LED boot behavior is as follows ...
 
