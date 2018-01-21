@@ -31,11 +31,10 @@ Python and PIP are likely installed ... or you are reasonably self-sufficient.
 If you are a regular Python developer ... you'll be good to go.
 If not, you'll have the default Apple Python installation (old) and no PIP.
 
-Try ...
-
     sudo easy_install pip
 
-If that fails, then using Homebrew to manage Python is the way to go ...
+If that fails, then using Homebrew to install and manage Python
+is the way to go.  Note: This will take awhile, e.g a coffee break.
 
     brew install python  # Includes PIP
 
@@ -43,21 +42,67 @@ If that fails, then using Homebrew to manage Python is the way to go ...
 
 Oh dear, there is a little more effort required here.
 Fortunately, Nick Moore has you covered with his
-(detailed installation instructions)[https://github.com/nickzoic/mpy-tut/blob/master/tut/installing.md#windows-10] ... thanks Nick !
+[detailed installation instructions](https://github.com/nickzoic/mpy-tut/blob/master/tut/installing.md#windows-10) ... thanks Nick !
 
-## 2. Install ESPTool (firmware installer)
+## 2. Install USB serial driver (if required)
+
+Development interaction with the ESP32 occurs over a USB serial connection.
+The ESP32 development board chosen for the Lolibot is the
+[Lolin32 Lite](https://wiki.wemos.cc/products:lolin32:lolin32_lite).
+The Lolin32 Lite uses the CH340 USB serial interface chip.
+
+If you are already familar with developing for embedded computers,
+then you are likely on top of the USB serial driver and configuration
+required on your development machine.
+
+### Linux: USB serial driver is probably included
+
+Linux already includes the CH340 USB serial driver.
+However, you may need to give yourself permission to access the serial device.
+
+    sudo adduser $USER dialout
+    id | grep dialout  # Check if your user is in the "dialout" group
+
+You may need to log out and then log back in again for this change to
+have effect.
+
+When you plug your LoliBot (ESP32) into the USB port, it should appear as
+/dev/ttyUSB0 (or similar).
+
+### Mac OS X: USB serial driver needs to be installed
+
+Mac OS X requires the CH340 USB serial driver.
+However, you may have installed them previously.  If you plug your LoliBot
+into the USB port ... if you can see the file /dev/tty.wchusbserial1410
+(or similar) then you can move on to the next step.
+
+Otherwise, install the [Mac OS X CH340 driver](https://wiki.wemos.cc/downloads)
+Finally, test plugging in the LoliBot and look for the serial device as above.
+
+### Windows: USB serial driver needs to be installed
+
+Once again, [Nick Moore's documentation](https://github.com/nickzoic/mpy-tut/blob/master/tut/installing.md#windows-10) comes to the rescue ... just go buy him
+a beer !
+
+You can get the Windows CH340 driver from
+[here](https://wiki.wemos.cc/downloads) or
+[there](http://www.wch.cn/download/CH341SER_EXE.html)
+
+## 3. Install ESPTool (firmware installer)
 
     pip install esptool
     esptool.py -h    # ESP8266 ROM Bootloader Utility
     miniterm.py -h   # Simple low-level terminal program for the serial port
 
-## 3. Install AMPY (file transfer utility)
+## 4. Install AMPY (file transfer utility)
 
     pip install adafruit-ampy
     ampy --help 
     AMPY_DELAY=1     # Workaround for reliable interaction with raw REPL
 
-## 4. Install rshell (combined file transfer and microPython REPL interaction)
+## 5. Install rshell (combined file transfer and microPython REPL interaction)
+
+Optional: Requires Python 3.4 or newer.
 
     pip install rshell
     rshell -h
