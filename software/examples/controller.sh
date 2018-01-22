@@ -13,11 +13,11 @@ lolibot_control() {
 
 while read -rsn1 dir; do
   case "$dir" in
-    (x) lolibot_control stop;;
     (j) lolibot_control reverse;;
     (k) lolibot_control forward;;
     (h) lolibot_control left;;
     (l) lolibot_control right;;
     (q) break;;
+    (*) lolibot_control stop;;
   esac
 done
