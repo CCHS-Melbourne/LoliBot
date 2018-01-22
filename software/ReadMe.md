@@ -171,6 +171,13 @@ your mind about whether you like using "rshell".
 
     pip install rshell
     rshell -h
+    
+On debian, there is python2 and python3. Pip may be pointing to the wrong python
+If that is the case, try:
+    
+    apt-get install python3-setuptools
+    /usr/bin/easy_install3 pip
+    pip3 install rshell
 
 Another similar program to try out is
 [mpfshell](https://github.com/wendlers/mpfshell).
