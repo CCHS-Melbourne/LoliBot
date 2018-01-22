@@ -37,6 +37,9 @@ ampy put lib/aiko/wifi.py     lib/aiko/wifi.py
 echo '### Copy lolibot.py ###'
 ampy put lib/lolibot.py lib/lolibot.py
 
+echo '### Copy udp_control.py ###'
+ampy put lib/udp_control.py lib/udp_control.py
+
 echo '### Copy mpu9250.py ###'
 ampy put lib/mpu9250.py lib/mpu9250.py
 
