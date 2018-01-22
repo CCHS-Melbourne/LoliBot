@@ -7,8 +7,12 @@ set -eu
 
 ID="$1"
 
+get_host() {
+  PYTHONPATH="$(dirname $0)/../configuration" python -c "from mqtt import settings;print(settings['host'])"
+}
+
 lolibot_control() {
-  mosquitto_pub -d -h iot.eclipse.org -t lolibot/${ID}/in -m "$@"
+  mosquitto_pub -d -h "$(get_host)" -t lolibot/${ID}/in -m "$@"
 }
 
 trap "lolibot_control stop" EXIT
