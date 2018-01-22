@@ -20,8 +20,8 @@ one of the organisers or friendly and experienced helpers for assistance**
 The LoliBot software documentation is provided in three parts ...
 
 - Development (host) computer software installation _(this page)_
-- [LoliBot microPython software description](documentation/description.md)
-- [LoliBot end-to-end examples](documentation/end-to-end.md)
+- WILL EXIST SOON ... [LoliBot microPython software description](documentation/description.md)
+- WILL EXIST SOON ... [LoliBot end-to-end examples](documentation/end-to-end.md)
 
 # Development (host) computer software installation
 
@@ -376,4 +376,4 @@ Edit and transfer "configuration/mqtt.py", then try rebooting again.
 ---
 
 Now that your LoliBot is connected to Wi-Fi and MQTT, it is time to move on to
-[LoliBot microPython software description](documentation/description.md).
+[LoliBot microPython software description](documentation/description.md) ... WILL EXIST SOON
