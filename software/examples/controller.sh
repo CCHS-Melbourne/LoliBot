@@ -11,6 +11,8 @@ lolibot_control() {
   mosquitto_pub -d -h iot.eclipse.org -t lolibot/${ID}/in -m "$@"
 }
 
+trap "lolibot_control stop" EXIT
+
 while read -rsn1 dir; do
   case "$dir" in
     (j) lolibot_control reverse;;
