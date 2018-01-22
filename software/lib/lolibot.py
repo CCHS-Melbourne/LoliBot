@@ -88,7 +88,7 @@ def on_message_lolibot(topic, payload_in):
     servo_pos(int (servo_position))
     return True
 
-  if tokens[0] == "motors":
+  if len(tokens) == 5 and tokens[0] == "motors":
     motor_settings = [int(x) for x in tokens[1:]]
     print("motor settings: {}".format(' '.join (tokens[1:])))
     motor_action(motor_settings)
