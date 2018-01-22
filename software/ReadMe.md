@@ -23,6 +23,8 @@ The LoliBot software documentation is provided in three parts ...
 - WILL EXIST SOON ... [LoliBot microPython software description](documentation/description.md)
 - WILL EXIST SOON ... [LoliBot end-to-end examples](documentation/end-to-end.md)
 
+There is also the [OHMC "LoliBot Software" Presentation](https://www.slideshare.net/geekscape/lca2018-open-hardware-miniconference-lolibot-software).
+
 # Development (host) computer software installation
 
 The recommended tools are all written in Python.  If you are familar with
