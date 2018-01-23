@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LoliBot WebSocket Controller</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="http://www.hivemq.com/demos/websocket-client/js/mqttws31.js"></script>
+
+  <script type='text/javascript'>//<![CDATA[
+
+ //Using the HiveMQ public Broker, with a random client Id
+ var client = new Messaging.Client("iot.eclipse.org", 443, "myclientid_" + parseInt(Math.random() * 100, 10));
+
+ //Gets  called if the websocket/mqtt connection gets disconnected for any reason
+ client.onConnectionLost = function (responseObject) {
+     $('#messages').append('<span>connection lost: ' + responseObject.errorMessage + '</span><br/>');
+ };
+
+ //Connect Options
+ var options = {
+     timeout: 3,
+     //Gets Called if the connection has successfully been established
+     onSuccess: function () {
+         $('#messages').append('<span>Connected</span><br/>');
+     },
+     //Gets Called if the connection could not be established
+     onFailure: function (message) {
+         $('#messages').append('<span>Connection Failed</span><br/>');
+     },
+     useSSL: true
+ };
+
+ var publish = function (payload, topic, qos) {
+     var message = new Messaging.Message(payload);
+     message.destinationName = topic;
+     message.qos = qos;
+     client.send(message);
+     $('#messages').append('<span>' + payload + '</span><br/>');
+ }
+
+ var sendCommand = function (payload) {
+     publish(payload, $('#topic').val(), 2);
+ }
+
+ var hexToRGB = function(hex) {
+   var value = hex.match(/[A-Za-z0-9]{2}/g);
+   return value.map(function(v) { return parseInt(v, 16) });
+ }
+
+ var triColour = function() {
+    var rear = hexToRGB($("#rear_colour").val());
+    var left = hexToRGB($("#left_colour").val());
+    var right = hexToRGB($("#right_colour").val());
+
+    sendCommand('(led:write ' + rear.join(" ") + ' ' + left.join(" ") + ' ' + right.join(" ") + ')');
+ }
+//]]> 
+
+</script>
+
+</head>
+<body>
+
+<form id="config">
+ LoliBot Topic: <input id="topic" value="lolibot/esp32_XXXXX/in" />
+</form>
+
+<button onclick="client.connect(options);">Connect</button>
+<br><br>
+
+<div>
+  <button onclick="sendCommand('forward');"><i class="fa fa-arrow-up fa-4x" aria-hidden="true"></i></button>
+  <button onclick="sendCommand('reverse');"><i class="fa fa-arrow-down fa-4x" aria-hidden="true"></i></button>
+  <br>
+  <button onclick="sendCommand('left');"><i class="fa fa-arrow-left fa-4x" aria-hidden="true"></i></button>
+  <button onclick="sendCommand('right');"><i class="fa fa-arrow-right fa-4x" aria-hidden="true"></i></button>
+  <br>
+  <button onclick="sendCommand('stop');"><i class="fa fa-stop-circle-o fa-4x" aria-hidden="true"></i></button>
+</div>
+
+<form id="colour">
+ Rear LED: <input id="rear_colour" type="color" /><br/>
+ Left LED: <input id="left_colour" type="color" /><br/>
+ Right LED: <input id="right_colour" type="color" /><br/>
+</form>
+<button onclick="triColour()">LED TriColour</button>
+<br>
+<button onclick="sendCommand('(led:clear)');">LED Off</button>
+
+<br><br>
+
+<button onclick="client.disconnect();">Disconnect</button>
+<div id="messages"></div>
+
+</body>
+
+</html>
